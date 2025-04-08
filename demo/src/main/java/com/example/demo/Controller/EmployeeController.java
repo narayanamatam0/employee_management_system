@@ -38,6 +38,11 @@ public class EmployeeController {
     @PutMapping("/employees/update/{id}")
     public ResponseEntity<Employee> updateEmployee(@PathVariable Long id, @RequestBody Employee employee) {
         Employee updatedEmployee = employeeService.updateEmployeeById(id, employee);
-        return ResponseEntity.status(200).body(updatedEmployee);
+        if (updatedEmployee != null) {
+            return ResponseEntity.ok(updatedEmployee);
+        } else {
+            return ResponseEntity.notFound().build();
+            
+        }
     }
 }
